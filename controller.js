@@ -8,3 +8,12 @@ exports.getCat = (req, res, next) => {
         next(err)
     })
 }
+
+exports.getRev = (req, res, next) => {
+    selectReview() .then((reviews) => {
+        res.status(200).send({reviews})
+    })
+    .catch(err => {
+        next(err)
+    })
+}

@@ -31,6 +31,7 @@ describe('3. GET /api/categories', () => {
         });
       });
   });
+  describe('incorrect route testing', () => {
    //Unhappy path  route not found 404
    test('status:404, responds with msg: "Route not found"', () =>{
     return request(app)
@@ -40,4 +41,5 @@ describe('3. GET /api/categories', () => {
         expect(body.msg).toBe("Route not found");
     })
 })
-});
+})
+})
