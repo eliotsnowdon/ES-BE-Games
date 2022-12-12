@@ -1,16 +1,8 @@
 # Northcoders House of Games API
-
-## Background
-
-We will be building an API for the purpose of accessing application data programmatically. The intention here is to mimic the building of a real world backend service (such as reddit) which should provide this information to the front end architecture.
-
-Your database will be PSQL, and you will interact with it using [node-postgres](https://node-postgres.com/).
-
-## Kanban
-
-### Link to your Trello Board here: https://trello.com/b/gBtX4GN3/be-nc-games
-
-To keep track of the tasks involved in this project we're going to use a kanban board. Ensure that you work on one _ticket_ at time. You can click on the ticket to find out more information about what is required for the feature. A ticket is not considered complete unless both the happy path and errors response are handled. You can make use of the checklist on each ticket to keep track of the errors you want to handle. You can also make use of [error-handling.md](error-handling.md) to consider the error codes we may wish to respond with.
+To re-create the task within your own machine locally first you will need to create your own repo directory. From there you copy the repo as normal and within the terminal use the commands as follows. git remote set-url origin YOUR_NEW_REPO_URL_HERE
+git branch -M main
+git push -u origin main
+From here you must add the two .env files for test and dev databases and then run npm install for essentials. 
 
 **Please ensure you work through the tickets in numerical order.**
 
