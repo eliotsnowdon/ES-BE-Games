@@ -2,7 +2,7 @@
 To re-create the task within your own machine locally first you will need to create your own repo directory. From there you copy the repo as normal and within the terminal use the commands as follows. git remote set-url origin YOUR_NEW_REPO_URL_HERE
 git branch -M main
 git push -u origin main
-From here you must add the two .env files for test and dev databases and then run npm install for essentials. 
+From here you must add the two .env files for test and dev databases. To do so touch .env.test / .env.dev repectively, then run npm install for essentials. 
 
 **Please ensure you work through the tickets in numerical order.**
 
