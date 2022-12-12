@@ -1,11 +1,11 @@
 const express = require('express')
 
-const {getCat, getRev} = require('./controller.js')
+const {getCat, getReview} = require('./controller.js')
 
 const app = express()
 
 app.get('/api/categories', getCat);
-app.get('/api/reviews' , getRev);
+app.get('/api/reviews' , getReview);
 
 app.all('/*', (req, res) => {
     res.status(404).send({ msg: 'Route not found' });
