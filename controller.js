@@ -1,4 +1,4 @@
-const {selectCat} = require('./model.js')
+const {selectCat,selectReview,selectReviewById} = require('./model.js')
 
 exports.getCat = (req, res, next) => {
     selectCat() .then((categories) => {
@@ -16,4 +16,14 @@ exports.getRev = (req, res, next) => {
     .catch(err => {
         next(err)
     })
+}
+
+exports.getRevById = (req, res) => {
+    const {review_id} = req.params
+    selectReviewById(review_id).then((reviews) => {
+    res.status(200).send({reviews})
+  })
+  .catch(err => {
+    next(err)
+  })
 }

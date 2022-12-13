@@ -43,3 +43,8 @@ describe('3. GET /api/categories', () => {
 })
 })
 })
+describe('5-get reviews by Id', () => {
+  test('status:200 returns object as expected', () => {
+    
+  })
+})
