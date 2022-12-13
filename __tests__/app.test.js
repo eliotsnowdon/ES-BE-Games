@@ -108,4 +108,37 @@ describe('5-get reviews by Id', () => {
   })
 })
     });
-
+ describe('6-get comments by Id', () => {
+      test('status:200 returns array of comments as expected from specific Id', () => {
+        return request(app)
+          .get('/api/reviews/2/comments')
+          .expect(200)
+          .then(({ body }) => {
+            const {comments} = body;
+          comments.forEach((com) => {
+            expect(com).toEqual(
+              expect.objectContaining({
+                review_id:expect.any(Number),
+                comment_id:expect.any(Number),
+                votes:expect.any(Number),
+                created_at:expect.any(String),
+                author:expect.any(String),
+                body:expect.any(String),
+              })
+            )
+          })
+      })
+    })
+    test('that the returned item is in descending order', () => {
+      return request(app)
+    .get('/api/reviews/2/comments')
+    .expect(200)
+    .then(({ body }) => {
+      const {comments} = body;
+      expect(comments).toBeInstanceOf(Array);
+      expect(comments).toBeSortedBy('created_at',{descending:true});
+      
+    });
+    })
+  })
+        

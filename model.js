@@ -22,3 +22,13 @@ exports.selectReviewById = (review_id) => {
         return (result.rows)
     })
 }
+
+exports.selectCommentById = (review_id) => {
+    let queryStr = `SELECT reviews.votes, comment_id, comments.created_at, author, body, comments.review_id FROM comments
+     JOIN reviews ON comments.review_id = reviews.review_id
+    WHERE comments.review_id = ${review_id} ORDER BY created_at desc`
+    return db.query(queryStr)
+    .then((result) => {
+         return result.rows
+    })
+}
