@@ -7,9 +7,10 @@ exports.selectCat = () => {
     })
 }
 
-exports.selectReviewById = () => {
-    return db.query(`SELECT * FROM reviews WHERE review_id = ${review_id};`)
+exports.selectReviewById = (review_id) => {
+    let queryStr = `SELECT * FROM reviews WHERE review_id = ${review_id}`
+    return db.query(queryStr)
     .then((result) => {
-        return result.rows[0]
+        return (result.rows[0])
     })
 }

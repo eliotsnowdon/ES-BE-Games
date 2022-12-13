@@ -20,8 +20,9 @@ exports.getRev = (req, res, next) => {
 
 exports.getRevById = (req, res, next) => {
     const {review_id} = req.params
-    selectReviewById(review_id).then((reviews) => {
-    res.status(200).send({reviews})
+    console.log(review_id)
+    selectReviewById(review_id).then((review) => {
+    res.status(200).send({review})
   })
   .catch(err => {
     next(err)
