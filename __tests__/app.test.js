@@ -67,7 +67,7 @@ describe('4. Get reviews', () => {
           );
         });
       });
-})
+
 test('status:200, responds with an array of categories objects is in desc order', () => {
   return request(app)
     .get('/api/reviews')
@@ -79,7 +79,6 @@ test('status:200, responds with an array of categories objects is in desc order'
       
     });
       });
-    });
     
 describe('5-get reviews by Id', () => {
   test('status:200 returns object as expected', () => {
@@ -107,3 +106,5 @@ describe('5-get reviews by Id', () => {
       });
   })
 })
+    });
+

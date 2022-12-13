@@ -1,3 +1,4 @@
+
 const {selectCat,selectReview,selectReviewById} = require('./model.js')
 
 exports.getCat = (req, res, next) => {
@@ -9,7 +10,7 @@ exports.getCat = (req, res, next) => {
     })
 }
 
-exports.getRev = (req, res, next) => {
+exports.getReview = (req, res, next) => {
     selectReview() .then((reviews) => {
         res.status(200).send({reviews})
     })
