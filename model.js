@@ -14,3 +14,11 @@ exports.selectReview = () => {
          return result.rows
     })
 }
+
+exports.selectReviewById = (review_id) => {
+    let queryStr = `SELECT * FROM reviews WHERE review_id = ${review_id}`
+    return db.query(queryStr)
+    .then((result) => {
+        return (result.rows)
+    })
+}
