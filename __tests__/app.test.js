@@ -43,6 +43,44 @@ describe('3. GET /api/categories', () => {
 })
 })
 })
+describe('4. Get reviews', () => {
+  test('status:200, responds with an array of categories objects', () => {
+    return request(app)
+      .get('/api/reviews')
+      .expect(200)
+      .then(({ body }) => {
+        const {reviews} = body;
+        expect(reviews).toBeInstanceOf(Array);
+        reviews.forEach((review) => {
+          expect(review).toEqual(
+            expect.objectContaining({
+              title:expect.any(String),
+              designer:expect.any(String),
+              owner:expect.any(String),
+              review_img_url:expect.any(String),
+              category:expect.any(String),
+              created_at:expect.any(String),
+              votes:expect.any(Number),
+              comment_count:expect.any(String),
+              review_id:expect.any(Number)
+            })
+          );
+        });
+      });
+})
+test('status:200, responds with an array of categories objects is in desc order', () => {
+  return request(app)
+    .get('/api/reviews')
+    .expect(200)
+    .then(({ body }) => {
+      const {reviews} = body;
+      expect(reviews).toBeInstanceOf(Array);
+      expect(reviews).toBeSortedBy('created_at',{descending:true});
+      
+    });
+      });
+    });
+    
 describe('5-get reviews by Id', () => {
   test('status:200 returns object as expected', () => {
     return request(app)
