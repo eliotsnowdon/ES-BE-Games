@@ -68,4 +68,15 @@ describe('4. Get reviews', () => {
         });
       });
 })
-})
+test('status:200, responds with an array of categories objects is in desc order', () => {
+  return request(app)
+    .get('/api/reviews')
+    .expect(200)
+    .then(({ body }) => {
+      const {reviews} = body;
+      expect(reviews).toBeInstanceOf(Array);
+      expect(reviews).toBeSortedBy('created_at',{descending:true});
+      
+    });
+      });
+    });
