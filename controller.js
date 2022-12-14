@@ -31,7 +31,9 @@ exports.getRevById = (req, res, next) => {
 
 exports.getComFromId = (req, res, next) => {
     const {review_id} = req.params
-    selectCommentById(review_id).then((comments) => {
+    const promises = [selectCommentById(review_id),selectReviewById(review_id)]
+    Promise.all(promises)
+    .then(([comments]) => {
         res.status(200).send({comments})
     })
     .catch(err => {

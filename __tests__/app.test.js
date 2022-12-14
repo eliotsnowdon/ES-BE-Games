@@ -88,7 +88,6 @@ describe('5-get reviews by Id', () => {
       .expect(200)
       .then(({ body }) => {
         const {reviews} = body;
-        expect(reviews).toBeInstanceOf(Array);
         reviews.forEach((review) => {
           expect(review).toEqual(
             expect.objectContaining({
@@ -106,7 +105,13 @@ describe('5-get reviews by Id', () => {
         });
       });
   })
+  test('valid id not database', () => {
+    return request(app)
+    .get('/api/reviews/3000')
+    .expect(404)
+  })
 })
+
     });
  describe('6-get comments by Id', () => {
       test('status:200 returns array of comments as expected from specific Id', () => {
@@ -139,6 +144,25 @@ describe('5-get reviews by Id', () => {
       expect(comments).toBeSortedBy('created_at',{descending:true});
       
     });
+    })
+    test('valid id but no comments', () => {
+      return request(app)
+      .get('/api/reviews/1/comments')
+      .expect(200)
+      .then(({ body }) => {
+        const {comments} = body;
+        expect(comments).toEqual([])
+      })
+    })
+    test('invalid id', () => {
+      return request(app)
+      .get('/api/reviews/bananna/comments')
+      .expect(400)
+    })
+    test('valid id with no existing number', () => {
+      return request(app)
+      .get('/api/reviews/9999/comments')
+      .expect(404)
     })
   })
         
