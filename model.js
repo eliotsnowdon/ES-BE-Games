@@ -35,3 +35,12 @@ exports.selectCommentById = (review_id) => {
          return result.rows
     })
 }
+
+exports.insertComment = (newComment, Id) => {
+    const {username, body} = newComment
+    let queryStr = 'INSERT INTO comments (author, body, review_id) VALUES ($1, $2, $3) RETURNING *'
+    return db.query(queryStr,[username, body, Id])
+    .then((result) => {
+        return result.rows[0]
+    })
+}   

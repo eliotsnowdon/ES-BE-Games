@@ -1,7 +1,7 @@
 const express = require('express')
 
 
-const {getCat, getReview, getRevById, getComFromId} = require('./controller.js')
+const {getCat, getReview, getRevById, getComFromId, postComments} = require('./controller.js')
 
 
 
@@ -11,6 +11,9 @@ app.get('/api/categories', getCat);
 app.get('/api/reviews' , getReview);
 app.get('/api/reviews/:review_id', getRevById);
 app.get('/api/reviews/:review_id/comments', getComFromId);
+
+app.use(express.json())
+app.post('/api/reviews/:review_id/comments', postComments)
 
 
 

@@ -165,4 +165,38 @@ describe('5-get reviews by Id', () => {
       .expect(404)
     })
   })
-        
+describe('7-post', () => {
+  test('status:201 adds comments to path', () => {
+    newComment = {
+      username: "mallionaire",
+      body:"i am him"
+    }
+    return request(app)
+    .post('/api/reviews/3/comments')
+    .send(newComment)
+    .expect(201)
+    .then(({ body }) => {
+      expect(body.comments).toEqual(
+        expect.objectContaining({
+          author: 'mallionaire',
+          body: "i am him",
+          author:expect.any(String),
+          comment_id:expect.any(Number),
+          created_at:expect.any(String),
+          review_id:expect.any(Number),
+          votes:expect.any(Number)
+        })
+      );
+    });
+  })
+  test('adds comments to invalid username', () => {
+    newComment = {
+      username: "jambo",
+      body:"i am him"
+    }
+    return request(app)
+    .post('/api/reviews/3/comments')
+    .send(newComment)
+    .expect(400)
+  })
+})
