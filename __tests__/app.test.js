@@ -197,6 +197,35 @@ describe('7-post', () => {
     return request(app)
     .post('/api/reviews/3/comments')
     .send(newComment)
+    .expect(404)
+  })
+  test('adds comments to invalid path', () => {
+    newComment = {
+      username: "mallionaire",
+      body:"i am him"
+    }
+    return request(app)
+    .post('/api/reviews/hello/comments')
+    .send(newComment)
     .expect(400)
+  })
+  test('adds comments to invalid comment', () => {
+    newComment = {
+      body:"i am him"
+    }
+    return request(app)
+    .post('/api/reviews/3/comments')
+    .send(newComment)
+    .expect(400)
+  })
+  test('adds comments to valid id that doesnt exist', () => {
+    newComment = {
+      username: "mallionaire",
+      body:"i am him"
+    }
+    return request(app)
+    .post('/api/reviews/300/comments')
+    .send(newComment)
+    .expect(404)
   })
 })
