@@ -12,7 +12,6 @@ app.get('/api/reviews' , getReview);
 app.get('/api/reviews/:review_id', getRevById);
 app.get('/api/reviews/:review_id/comments', getComFromId);
 
-app.use(express.json())
 
 
 
