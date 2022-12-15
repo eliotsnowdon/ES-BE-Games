@@ -16,9 +16,22 @@ exports.selectReview = () => {
 }
 
 exports.selectReviewById = (review_id) => {
-    let queryStr = `SELECT * FROM reviews WHERE review_id = ${review_id}`
-    return db.query(queryStr)
+    let queryStr = `SELECT * FROM reviews WHERE review_id = $1`
+    return db.query(queryStr,[review_id])
     .then((result) => {
+        if(result.rowCount === 0) {
+            return Promise.reject( {status:404 , msg:"Not Found"})
+        }
         return (result.rows)
+    })
+}
+
+exports.selectCommentById = (review_id) => {
+    let queryStr = `SELECT reviews.votes, comment_id, comments.created_at, author, body, comments.review_id FROM comments
+     JOIN reviews ON comments.review_id = reviews.review_id
+    WHERE comments.review_id = ${review_id} ORDER BY created_at desc`
+    return db.query(queryStr)
+    .then((result) => { 
+         return result.rows
     })
 }
