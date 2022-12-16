@@ -44,3 +44,14 @@ exports.insertComment = (newComment, Id) => {
         return result.rows[0]
     })
 }   
+
+exports.updateReview = (review_id, voteInc) => {
+    let queryStr = "UPDATE reviews SET votes = votes +$1 WHERE review_id = $2 RETURNING *"
+    return db.query(queryStr, [voteInc, review_id])
+    .then((result) => {
+        if(result.rowCount === 0) {
+            return Promise.reject( {status:404 , msg:"Not Found"})
+        }
+        return result.rows[0]
+    })
+}

@@ -229,3 +229,81 @@ describe('7-post', () => {
     .expect(404)
   })
 })
+
+describe('8-patch', () => {
+  test('status 200 with positive number', () => {
+    const voteInc = {voteInc: 5}
+    return request(app)
+    .patch('/api/reviews/3')
+    .send(voteInc)
+    .expect(200)
+    .then(({body}) => {
+      expect(body.review).toEqual(
+        expect.objectContaining({
+          votes: 10,
+          category:"social deduction",
+          created_at:'2021-01-18T10:01:41.251Z',
+          designer:'Akihisa Okui',
+          owner:'bainesface',
+          review_id: 3,
+          review_img_url:'https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png',
+          title:"Ultimate Werewolf",
+          review_body:'We couldn\'t find the werewolf!' .  
+        })
+      )
+
+    })
+
+  })
+  test('adds to invalid review_id', () => {
+    const voteInc = {voteInc: 5}
+    return request(app)
+    .patch('/api/reviews/hello')
+    .send(voteInc)
+    .expect(400)
+    .then(({body}) =>{
+      expect(body.msg).toBe("Bad Request");
+  })
+  })
+  test('adds to valid id but with no contence', () => {
+    const voteInc = {voteInc: 5}
+    return request(app)
+    .patch('/api/reviews/300')
+    .send(voteInc)
+    .expect(404)
+  })
+  test('invalid increment type for voteInc', () => {
+    const voteInc = {voteInc: 'dog'}
+    return request(app)
+    .patch('/api/reviews/3')
+    .send(voteInc)
+    .expect(400)
+    .then(({body}) =>{
+      expect(body.msg).toBe("Bad Request");
+  })
+  })
+  test('status 200 with negative number', () => {
+    const voteInc = {voteInc: -6}
+    return request(app)
+    .patch('/api/reviews/3')
+    .send(voteInc)
+    .expect(200)
+    .then(({body}) => {
+      expect(body.review).toEqual(
+        expect.objectContaining({
+          votes: -1,
+          category:"social deduction",
+          created_at:'2021-01-18T10:01:41.251Z',
+          designer:'Akihisa Okui',
+          owner:'bainesface',
+          review_id: 3,
+          review_img_url:'https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png',
+          title:"Ultimate Werewolf",
+          review_body:'We couldn\'t find the werewolf!'
+        })
+      )
+
+    })
+
+  })
+})

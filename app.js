@@ -1,7 +1,7 @@
 const express = require('express')
 
 
-const {getCat, getReview, getRevById, getComFromId, postComments} = require('./controller.js')
+const {getCat, getReview, getRevById, getComFromId, postComments, patchReview} = require('./controller.js')
 
 
 
@@ -14,6 +14,7 @@ app.get('/api/reviews/:review_id/comments', getComFromId);
 
 app.use(express.json())
 app.post('/api/reviews/:review_id/comments', postComments)
+app.patch('/api/reviews/:review_id', patchReview)
 
 
 
@@ -35,7 +36,7 @@ app.use((err, req, res, next) => {
     res.status(404).send({msg: 'Route not found'})
   }
   else if(err.code === '23502' || err.code === '42703' || err.code === '22P02'){
-    res.status(400).send({msg: 'Bad Request'})
+    res.status(400).send({msg:'Bad Request'})
   }
   else{
     next(err)
