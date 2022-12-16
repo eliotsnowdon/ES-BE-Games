@@ -248,9 +248,9 @@ describe('8-patch', () => {
           review_id: 3,
           review_img_url:'https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png',
           title:"Ultimate Werewolf",
-          review_body:'We couldn\'t find the werewolf!' .  
+          review_body:'We couldn\'t find the werewolf!'  
         })
-      )
+        )
 
     })
 
@@ -301,9 +301,29 @@ describe('8-patch', () => {
           title:"Ultimate Werewolf",
           review_body:'We couldn\'t find the werewolf!'
         })
-      )
+    )
 
     })
 
+  })
+})
+describe('9. GET /api/users', () => {
+  test('status:200, responds with an array of categories objects', () => {
+    return request(app)
+      .get('/api/users')
+      .expect(200)
+      .then(({ body }) => {
+        const {users} = body;
+        expect(users).toHaveLength(4);
+        users.forEach((user) => {
+          expect(user).toEqual(
+            expect.objectContaining({
+              username:expect.any(String),
+              name:expect.any(String),
+              avatar_url:expect.any(String)
+            })
+          );
+        });
+      });
   })
 })
