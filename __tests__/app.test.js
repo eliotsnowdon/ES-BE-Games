@@ -248,7 +248,7 @@ describe('8-patch', () => {
           review_id: 3,
           review_img_url:'https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png',
           title:"Ultimate Werewolf",
-          review_body:'We couldn\'t find the werewolf!'
+          review_body:'We couldn\'t find the werewolf!' .  
         })
       )
 
