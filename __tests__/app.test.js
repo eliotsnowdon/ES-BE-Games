@@ -307,7 +307,7 @@ describe('8-patch', () => {
 
   })
 })
-describe('9. GET /api/categories', () => {
+describe('9. GET /api/users', () => {
   test('status:200, responds with an array of categories objects', () => {
     return request(app)
       .get('/api/users')
