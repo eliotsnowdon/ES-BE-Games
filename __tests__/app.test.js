@@ -241,15 +241,14 @@ describe('8-patch', () => {
       expect(body.review).toEqual(
         expect.objectContaining({
           votes: 10,
-          category:expect.any(String),
-          created_at:expect.any(String),
-          review_id:expect.any(Number),
-          designer:expect.any(String),
-          owner:expect.any(String),
+          category:"social deduction",
+          created_at:'2021-01-18T10:01:41.251Z',
+          designer:'Akihisa Okui',
+          owner:'bainesface',
           review_id: 3,
-          review_img_url:expect.any(String),
-          title:expect.any(String),
-          review_body:expect.any(String)
+          review_img_url:'https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png',
+          title:"Ultimate Werewolf",
+          review_body:'We couldn\'t find the werewolf!'
         })
       )
 
@@ -262,6 +261,9 @@ describe('8-patch', () => {
     .patch('/api/reviews/hello')
     .send(voteInc)
     .expect(400)
+    .then(({body}) =>{
+      expect(body.msg).toBe("Bad Request");
+  })
   })
   test('adds to valid id but with no contence', () => {
     const voteInc = {voteInc: 5}
@@ -276,5 +278,32 @@ describe('8-patch', () => {
     .patch('/api/reviews/3')
     .send(voteInc)
     .expect(400)
+    .then(({body}) =>{
+      expect(body.msg).toBe("Bad Request");
+  })
+  })
+  test('status 200 with negative number', () => {
+    const voteInc = {voteInc: -6}
+    return request(app)
+    .patch('/api/reviews/3')
+    .send(voteInc)
+    .expect(200)
+    .then(({body}) => {
+      expect(body.review).toEqual(
+        expect.objectContaining({
+          votes: -1,
+          category:"social deduction",
+          created_at:'2021-01-18T10:01:41.251Z',
+          designer:'Akihisa Okui',
+          owner:'bainesface',
+          review_id: 3,
+          review_img_url:'https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png',
+          title:"Ultimate Werewolf",
+          review_body:'We couldn\'t find the werewolf!'
+        })
+      )
+
+    })
+
   })
 })
