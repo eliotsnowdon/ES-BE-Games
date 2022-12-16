@@ -61,3 +61,7 @@ exports.selectUser = () => {
         return result.rows
     })
 }
+
+exports.selectByQuery = () => {
+    
+}

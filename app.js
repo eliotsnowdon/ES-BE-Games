@@ -1,7 +1,7 @@
 const express = require('express')
 
 
-const {getCat, getReview, getRevById, getComFromId, postComments, patchReview, getUsers} = require('./controller.js')
+const {getCat, getReview, getRevById, getComFromId, postComments, patchReview, getUsers, getQuery} = require('./controller.js')
 
 
 
@@ -16,6 +16,7 @@ app.use(express.json())
 app.post('/api/reviews/:review_id/comments', postComments)
 app.patch('/api/reviews/:review_id', patchReview)
 app.get('/api/users', getUsers)
+app.get('/api/reivews', getQuery)
 
 
 app.all('/*', (req, res) => {
