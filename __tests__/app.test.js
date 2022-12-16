@@ -229,3 +229,53 @@ describe('7-post', () => {
     .expect(404)
   })
 })
+
+describe('8-patch', () => {
+  test('status 200 with positive number', () => {
+    const voteInc = {voteInc: 5}
+    return request(app)
+    .patch('/api/reviews/3')
+    .send(voteInc)
+    .expect(200)
+    .then(({body}) => {
+      expect(body.review).toEqual(
+        expect.objectContaining({
+          votes: 10,
+          category:expect.any(String),
+          created_at:expect.any(String),
+          review_id:expect.any(Number),
+          designer:expect.any(String),
+          owner:expect.any(String),
+          review_id: 3,
+          review_img_url:expect.any(String),
+          title:expect.any(String),
+          review_body:expect.any(String)
+        })
+      )
+
+    })
+
+  })
+  test('adds to invalid review_id', () => {
+    const voteInc = {voteInc: 5}
+    return request(app)
+    .patch('/api/reviews/hello')
+    .send(voteInc)
+    .expect(400)
+  })
+  test('adds to valid id but with no contence', () => {
+    const voteInc = {voteInc: 5}
+    return request(app)
+    .patch('/api/reviews/300')
+    .send(voteInc)
+    .expect(404)
+  })
+  test('invalid increment type for voteInc', () => {
+    const voteInc = {voteInc: 'dog'}
+    return request(app)
+    .patch('/api/reviews/3')
+    .send(voteInc)
+    .expect(400)
+  })
+
+})
