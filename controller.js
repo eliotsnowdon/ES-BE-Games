@@ -1,5 +1,5 @@
 
-const {selectCat,selectReview,selectReviewById, selectCommentById, insertComment} = require('./model.js')
+const {selectCat,selectReview,selectReviewById, selectCommentById, insertComment, selectUser} = require('./model.js')
 
 exports.getCat = (req, res, next) => {
     selectCat() .then((categories) => {
@@ -45,6 +45,16 @@ exports.postComments = (req, res, next) => {
     insertComment(req.body, req.params.review_id)
     .then((comments) => {
         res.status(201).send({comments})
+    })
+    .catch(err => {
+        next(err)
+    })
+}
+
+exports.getUsers = (req, res, next) => {
+    selectUser()
+    .then((user) => {
+        res.status(200).send({user})
     })
     .catch(err => {
         next(err)
