@@ -4,10 +4,10 @@ const express = require('express')
 const {getCat, getReview, getRevById, getComFromId, postComments, patchReview, getUsers} = require('./controller.js')
 
 const cors = require('cors');
-app.use(cors());
+
 
 const app = express()
-
+app.use(cors());
 app.get('/api/categories', getCat);
 app.get('/api/reviews' , getReview);
 app.get('/api/reviews/:review_id', getRevById);
