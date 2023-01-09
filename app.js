@@ -3,7 +3,8 @@ const express = require('express')
 
 const {getCat, getReview, getRevById, getComFromId, postComments, patchReview, getUsers} = require('./controller.js')
 
-
+const cors = require('cors');
+app.use(cors());
 
 const app = express()
 
