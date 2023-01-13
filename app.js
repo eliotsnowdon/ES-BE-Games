@@ -1,7 +1,7 @@
 const express = require('express')
 
 
-const {getCat, getReview, getRevById, getComFromId, postComments, patchReview, getUsers} = require('./controller.js')
+const {getCat, getReview, getRevById, getComFromId, postComments, patchReview, getUsers, getRevByCat} = require('./controller.js')
 
 const cors = require('cors');
 
@@ -17,7 +17,7 @@ app.use(express.json())
 app.post('/api/reviews/:review_id/comments', postComments)
 app.patch('/api/reviews/:review_id', patchReview)
 app.get('/api/users', getUsers)
-
+app.get('/api/reviews/:category', getRevByCat);
 
 app.all('/*', (req, res) => {
     res.status(404).send({ msg: 'Route not found' });

@@ -61,3 +61,14 @@ exports.selectUser = () => {
         return result.rows
     })
 }
+
+exports.selectReviewByCat = (category) => {
+    let queryStr = `SELECT * FROM reviews WHERE category = $1`
+    return db.query(queryStr,[category])
+    .then((result) => {
+        if(result.rowCount === 0) {
+            return Promise.reject( {status:404 , msg:"Not Found"})
+        }
+        return (result.rows)
+    })
+}
